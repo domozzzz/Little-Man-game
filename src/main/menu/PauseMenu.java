@@ -23,5 +23,4 @@ public class PauseMenu extends Menu {
 		font.draw("unpause", display, 40);
 		font.draw("back to main menu", display, 58);
 	}
-
 }

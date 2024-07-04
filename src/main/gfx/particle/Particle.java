@@ -37,6 +37,7 @@ public class Particle extends Entity{
 	public void tick() {
 		super.tick();
 		
+		// set a random direction for the three particles
 		if (random < 0.25) {
 		    x += speed;
 		    y += speed;

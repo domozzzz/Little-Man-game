@@ -1,6 +1,5 @@
 package main.level;
 
-import main.entity.mob.Ghost;
 import main.entity.tile.Chest;
 import main.entity.tile.Door;
 import main.entity.tile.Floor;
@@ -13,6 +12,7 @@ import main.io.IO;
 public class Level3 extends Level {
 	
 	public Level3() {
+		ghosts = 16;
 		mapString = "/res/maps/map3.txt";
 		map = IO.loadMap(mapString);
 		loadTiles();
@@ -28,12 +28,4 @@ public class Level3 extends Level {
 		tiles[5] = new Water();
 		
 	}
-	
-	@Override
-	public void loadEntities() {
-		for (int i = 0; i < ghosts; i++) {
-			entities.add(new Ghost(this));
-		}
-	}
-
 }

@@ -4,14 +4,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import main.Game;
-import main.Item.Ammo;
-import main.Item.Inventory;
-import main.Item.Item;
-import main.Item.ItemEntity;
 import main.Item.Pistol;
 import main.Item.Axe;
-import main.Item.hat.DavysHat;
-import main.Item.hat.Hat;
 import main.entity.Entity;
 import main.entity.Map;
 import main.entity.tile.Tile;
@@ -26,7 +20,6 @@ public class Player extends Mob {
 	private final int BUILD_REACH = 16;
 	private final int SPAWN_X = 1;
 	private final int SPAWN_Y = 1;
-	private int maxHp = 10;
 	private int knockbackSpeed = 6;
 	private int knockBack;
 	private int ammo = 5;
@@ -36,9 +29,7 @@ public class Player extends Mob {
 	
 	private Pistol pistol;
 	private Axe axe;
-	private Inventory inventory;
 	private Input input;
-	private Hat hat;
 	private Map map;
 	private Game game;
 	private int activeSlot;
@@ -69,7 +60,6 @@ public class Player extends Mob {
 		screenCenterY = game.getDisplay().cameraHeight/2;
 		
 		initHitbox();
-		hat = new DavysHat();
 		image = front;
 	}
 	
@@ -78,18 +68,13 @@ public class Player extends Mob {
 		axe = new Axe();
 		
 		this.level = level;
-		inventory = new Inventory();
-		inventory.add(new Pistol(level));
-		inventory.add(new Axe());
-		inventory.add(Ammo.class, 5);
-	}
+		}
  	
 	public void tick() {
 		super.tick();
 				
 		pistol.tick();
 		axe.tick();
-		
 		
 		handleInputs();
 		handleEntities();
@@ -153,10 +138,6 @@ public class Player extends Mob {
 		
 		pistol.render(display, x, y, 0);
 		axe.render(display, x, y, 0);
-			
-	
-		//draw hat
-		hat.render(display, x, y, flip);
 		
 		//health
 		int fullHearts = hp/2;
@@ -320,13 +301,16 @@ public class Player extends Mob {
 		}
 	}
 	
-	public void reset() {
-		hp = maxHp;
+	public void sendToSpawn() {
 		x = SPAWN_X*SPRITE_SIZE;
 		y = SPAWN_Y*SPRITE_SIZE;
-
 		game.getDisplay().xScroll = 0;
 		game.getDisplay().yScroll = 0;
+	}
+	
+	public void reset() {
+		hp = maxHp;
+		sendToSpawn();
 	}
 		
 	private void handleEntityCollision() {
@@ -384,10 +368,6 @@ public class Player extends Mob {
 
 	public Game getGame() {
 		return game;
-	}
-	
-	public Inventory getInventory() {
-		return inventory;
 	}
 	
 	public int getXInFront() {
@@ -526,19 +506,6 @@ public class Player extends Mob {
 			knockBack = 0;
 		}
 	}
-	
-	public void throwItem(Item item) {
-		if (getActiveItem() != null) {
-			level.addEntity(new ItemEntity(getActiveItem(), getActiveItem().getImage(), getXInFront(), getYInFront()));
-		}
-	}
-	
-	public void dropItem(int slot) {
-		throwItem(getItem(slot));
-		if (getActiveItem() != null) {
-			inventory.removeItem(getItem(slot).getClass());
-		}
-	}
 
 	public void setLevel(Level level) {
 		this.level = level;
@@ -546,22 +513,6 @@ public class Player extends Mob {
 
 	public Level getLevel() {
 		return level;
-	}
-
-	public boolean isEquipped(Class<?> className) {
-	
-		if (getActiveItem() != null && getActiveItem().getClass().equals(className)) {
-			return true;
-		}
-		return false;
-	}
-	
-	public Item getActiveItem() {
-		return inventory.getItem(getActiveSlot());
-	}
-
-	public Item getItem(int slot) {
-		return inventory.getItem(slot);
 	}
 
 	public int getActiveSlot() {

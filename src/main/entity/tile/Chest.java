@@ -18,6 +18,7 @@ public class Chest extends Tile {
 		openedImg = SpriteSheet.getSpriteImage(2*TILE_SIZE, 1*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 		
 		this.level = level;
+	
 		collision = false;
 		breakable = false;
 	}
@@ -31,9 +32,7 @@ public class Chest extends Tile {
 	@Override
 	public void event(Game game) {
 		if (!opened) {
-//			level.getPlayer().getInventory().add(new Food());
-//			level.getPlayer().getInventory().add(new Food());
-//			level.getPlayer().getInventory().add(new Food());
+			level.getPlayer().heal(4);
 			Sound.open.play();
 			opened = true;
 		}	

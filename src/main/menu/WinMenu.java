@@ -12,15 +12,13 @@ public class WinMenu extends GameOverMenu{
 	
 	@Override
 	public void render(Display display) {
-
-		//Title
 		
-		display.fillColor(0xFFFFFFFF);
+		display.fillColor(0xFFFFFFFF); /// white
 		
 		if (font != null) {
 			font.draw("you win!",display, 10*8, 5*8);
 			
-			//Buttons
+			// buttons
 			font.draw("Replay", display, 10*8, 16*8);
 			font.draw("Quit", display, 10*8, 18*8);
 			

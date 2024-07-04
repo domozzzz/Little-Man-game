@@ -5,17 +5,18 @@ import java.util.ArrayList;
 
 import main.entity.Entity;
 import main.entity.Map;
+import main.entity.mob.Ghost;
 import main.entity.mob.Mob;
 import main.entity.mob.Player;
 import main.entity.tile.Tile;
 import main.gfx.Display;
+import main.io.IO;
 import main.io.Sound;
 
 public abstract class Level {
 	
 	protected String mapString;
-	protected int humans = 0;
-	protected int ghosts = 4;
+	protected int ghosts;
 
 	protected ArrayList<Entity> entities = new ArrayList<>();
 	public Tile[] tiles = new Tile[9999];
@@ -25,14 +26,8 @@ public abstract class Level {
 	protected Map map;
 	protected Player player;
 	private Player player2;
-	
-	public Level() {
-		//map = IO.loadMap(mapString);
-		loadTiles();
-	}
 
 	public void tick() {
-		
 		if (player != null) {
 			player.tick();
 		}
@@ -67,10 +62,6 @@ public abstract class Level {
 			player.render(display);
 		}
 		
-		if (player2 != null) {
-			player2.render(display);
-		}
-		
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(display);
 		}
@@ -86,9 +77,7 @@ public abstract class Level {
 	}
 	
 	protected abstract void loadTiles();
-	
-	public abstract void loadEntities();
-	
+		
 	public Entity getEntityCollision(int x, int y, int w, int h) {
 		
 		Rectangle rect = new Rectangle(x, y, w, h);
@@ -119,6 +108,13 @@ public abstract class Level {
 			return true;
 		}
 		return false;
+	}
+	
+	public void loadEntities() {
+		for (int i = 0; i < ghosts; i++) {
+			entities.add(new Ghost(this));
+			System.out.println("ghost added");
+		}
 	}
 	
 	public void addTile(int tileNum, int x, int y) {

@@ -22,6 +22,8 @@ public abstract class Mob extends Entity {
 	protected int flip;
 	protected static final int SPRITE_SIZE = 16;
 	protected boolean killable = true;
+	protected  int maxHp = 10;
+
 	
 	public Mob() {
 		initHitbox();
@@ -65,7 +67,9 @@ public abstract class Mob extends Entity {
 	}
 	
 	public void heal(int hp) {
-		this.hp += hp;
+		if (this.hp + hp < maxHp) {
+			this.hp += hp;
+		}
 	}
 	
 	protected void isDead() {

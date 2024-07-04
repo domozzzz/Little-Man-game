@@ -44,13 +44,13 @@ public class Bullet extends Entity {
 		super.tick();
 		
 		switch(yDir)  {
-			case 'u' -> y-=2;
-			case 'd' -> y+=2;
+			case 'u' -> y -= 2;
+			case 'd' -> y += 2;
 		}
 		
 		switch(xDir)  {
-			case 'l' -> x-=2;
-			case 'r' -> x+=2;
+			case 'l' -> x -= 2;
+			case 'r' -> x += 2;
 		}
 		handleEntityCollision();
 	}

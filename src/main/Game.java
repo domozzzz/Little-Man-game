@@ -217,13 +217,14 @@ public class Game extends Canvas implements Runnable {
 		case LOSE:
 			setMenu(gameOverMenu);
 			break;
+		default:
+			break;
 		}
 		
-		player.reset();
+		setLevel(level);
+		player.sendToSpawn();
 		player.setMap(level.getMap());
 		level.addPlayer(player);
-		display.xScroll = 0;
-		display.yScroll = 0;
 	}
 
 	public static void main(String[] args) {
