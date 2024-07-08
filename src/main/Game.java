@@ -178,7 +178,7 @@ public class Game extends Canvas implements Runnable {
 		player.reset();
 		levelType = LevelType.ONE;
 		level = new Level1();
-		setLevel(levels[0]);
+		setLevel(level);
 	}
 
 	public Player getPlayer() {

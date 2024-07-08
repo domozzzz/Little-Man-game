@@ -29,11 +29,6 @@ public abstract class Item extends Entity {
 		checkCooldown();
 	}
 	
-	public void render(Display display, int x, int y, int flip) {
-		if (active) {
-			display.render(image, x, y, 0);
-		}
-	}	
 	public void setCooldown(int ticks) {
 		cooldownEnd = tickCount + ticks;
 		cooldown = true;

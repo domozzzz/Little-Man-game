@@ -3,6 +3,7 @@ package main.level;
 import main.entity.tile.Chest;
 import main.entity.tile.Door;
 import main.entity.tile.Floor;
+import main.entity.tile.Lava;
 import main.entity.tile.Tree;
 import main.entity.tile.Wall;
 import main.entity.tile.Water;
@@ -25,7 +26,7 @@ public class Level3 extends Level {
 		tiles[2] = new Tree(SpriteSheet.getSpriteImage(1*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		tiles[3] = new Door();
 		tiles[4] = new Chest(this);
-		tiles[5] = new Water();
+		tiles[5] = new Lava();
 		
 	}
 }

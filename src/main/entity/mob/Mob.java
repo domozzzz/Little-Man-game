@@ -16,7 +16,7 @@ public abstract class Mob extends Entity {
 	protected int speed;
 	protected int hp;
 	public BufferedImage front, back, side, frontWalk, backWalk,
-	sideWalk, heart, halfHeart, emptyHeart, bubble, hatImage, sideItem, sideWalk2;
+	sideWalk, heart, halfHeart, emptyHeart, bubble, hatImage, sideItem, sideWalk2, shootingStanding, shootingRunning, shootingFront, choppingStanding, choppingRunning, choppingFront;
 	protected boolean walking;
 	protected char lastDir;
 	protected int flip;
@@ -24,7 +24,6 @@ public abstract class Mob extends Entity {
 	protected boolean killable = true;
 	protected  int maxHp = 10;
 
-	
 	public Mob() {
 		initHitbox();
 	}
@@ -67,8 +66,10 @@ public abstract class Mob extends Entity {
 	}
 	
 	public void heal(int hp) {
-		if (this.hp + hp < maxHp) {
+		if (this.hp + hp <= maxHp) {
 			this.hp += hp;
+		} else {
+			this.hp = maxHp;
 		}
 	}
 	

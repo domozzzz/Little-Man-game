@@ -113,7 +113,6 @@ public abstract class Level {
 	public void loadEntities() {
 		for (int i = 0; i < ghosts; i++) {
 			entities.add(new Ghost(this));
-			System.out.println("ghost added");
 		}
 	}
 	

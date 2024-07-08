@@ -98,6 +98,11 @@ public class Player extends Mob {
 			} else {
 				image = front;
 			}
+			if (input.shoot) {
+				image = shootingFront;
+			} else if (input.axe) {
+				image = choppingFront;
+			}
 			break;
 		case 'l':
 			flip = 2;
@@ -109,9 +114,20 @@ public class Player extends Mob {
 					image = sideWalk;
 				} else {
 					image = sideWalk2;
+				}		
+				if (input.shoot) {
+					image = shootingRunning;
+				} else if (input.axe) {
+					image = choppingRunning;
 				}
 			} else {
-				image = side;
+				if (input.shoot) {
+					image = shootingStanding;
+				} else if (input.axe) {
+					image = choppingStanding;
+				} else {
+					image = side;
+				}
 			}
 			break;
 		case 'r':
@@ -125,8 +141,19 @@ public class Player extends Mob {
 				} else {
 					image = sideWalk2;
 				}
+				if (input.shoot) {
+					image = shootingRunning;
+				} else if (input.axe) {
+					image = choppingRunning;
+				}
 			} else {
-				image = side;
+				if (input.shoot) {
+					image = shootingStanding;
+				} else if (input.axe) {
+					image = choppingStanding;
+				} else {
+					image = side;
+				}
 			}
 			break;
 		}
@@ -135,9 +162,6 @@ public class Player extends Mob {
 	public void render(Display display) {
 		//draw player
 		super.render(display);
-		
-		pistol.render(display, x, y, 0);
-		axe.render(display, x, y, 0);
 		
 		//health
 		int fullHearts = hp/2;
@@ -330,7 +354,13 @@ public class Player extends Mob {
 		sideWalk = SpriteSheet.getSpriteImage(7*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 		sideItem = SpriteSheet.getSpriteImage(6*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
 		sideWalk2 = SpriteSheet.getSpriteImage(8*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
-		
+		shootingStanding = SpriteSheet.getSpriteImage(6*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		shootingRunning = SpriteSheet.getSpriteImage(5*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		shootingFront = SpriteSheet.getSpriteImage(10*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		choppingFront = SpriteSheet.getSpriteImage(11*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		choppingStanding = SpriteSheet.getSpriteImage(12*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+		choppingRunning = SpriteSheet.getSpriteImage(13*SPRITE_SIZE, 3*SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
+
 		//health
 		heart = SpriteSheet.getSpriteImage(26*8, 17*8, Display.ICON_SIZE, Display.ICON_SIZE);
 		halfHeart = SpriteSheet.getSpriteImage(27*8, 17*8, Display.ICON_SIZE, Display.ICON_SIZE);
@@ -338,7 +368,6 @@ public class Player extends Mob {
 		
 		
 		bullet = SpriteSheet.getSpriteImage(30*8, 17*8, Display.ICON_SIZE, Display.ICON_SIZE);
-		//gui
 	}
 	
 	@Override
