@@ -28,7 +28,7 @@ public class TitleMenu extends Menu {
 
 		if (font != null) {
 			//Title
-			font.draw("Pirates", display, 10*8, 5*8);
+			font.draw("Haunted Labyrinth", display, 5*8);
 			
 			//Buttons
 			font.draw("Start", display, 10*8, 16*8);
